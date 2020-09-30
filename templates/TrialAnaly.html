@@ -1,0 +1,247 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Analysis</title>
+    	<link rel="stylesheet" type="text/css" href="{% static 'TrialAnaly.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'TrialAnaly2.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+</head>
+<body>b
+
+<!---navbar-->
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<nav class="navbar navbar-expand-md navbar-light">
+      <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+<!---navbarEnd-->
+<div class="collapse navbar-collapse" id="myNavbar">
+        <div class="container-fluid">
+          <div class="row" id="myNavbar2">
+            <!-- sidebar -->
+            <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+              <a href="#" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">IBM</a>
+              <div class="bottom-border pb-3">
+                
+                <!---slider-->
+                <div class="spinner-grow text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                </div>
+                <!---slider-->
+
+
+                <a href="#" class="text-white">Twitter Sentiment Analysis</a>
+              </div>
+
+            <!--Entering other items like dashboard , and names of various analysis-->
+
+            <ul class="navbar-nav flex-column mt-4">
+              <div class="first">
+
+                <li class="nav-item"><a onclick="smoothScroll(document.getElementById('third'))" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-user text-light fa-lg mr-3"><div class="spinner-grow text-danger" role="status">
+                  <span class="sr-only">Loading...</span>
+                  </div></i>Happiness Analysis</a></li>
+
+                <div class="first">
+                <li class="nav-item"><a onclick="smoothScroll(document.getElementById('fourth'))" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"><div class="spinner-grow text-danger" role="status">
+                  <span class="sr-only">Loading...</span>
+                  </div>
+                </i>General Analysis</a></li>
+              </div>
+
+                <div class="first">
+                <li class="nav-item"><a onclick="smoothScroll(document.getElementById('fourth'))" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-shopping-cart text-light fa-lg mr-3"><div class="spinner-grow text-danger" role="status">
+                  <span class="sr-only">Loading...</span>
+                  </div></i>Emotional Analysis</a></li>
+                </div>
+
+                  <div class="first">
+                  <li class="nav-item"><a onclick="smoothScroll(document.getElementById('second'))" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-shopping-cart text-light fa-lg mr-3">
+                    <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+                  </i>Analyse Your Own Tweet</a></li>
+                </div>
+
+            <!--Entering other items like dashboard , and names of various analysis-->
+
+            </div>
+            </ul>
+            <!-- end of sidebar -->
+
+            <!-- top-nav -->
+            <div class="col-lg-9">
+             
+            </div>
+            <!-- end of top-nav -->
+
+          </div>
+        </div>
+      </div>
+</div>
+    </nav>
+
+     <!-- top-nav -->
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-navbar">
+              <div class="row align-items-center">
+                <div class="col-md-4">
+                  <h4 class="text-light text-uppercase mb-0">Dashboard</h4>
+                </div>
+                <div class="col-md-5">
+                  <form>
+                    <div class="input-group">
+                      <input type="text" class="form-control search-input" placeholder="Search...">
+                      <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger"></i></button>
+                      <div class="first"><button type="button" class = "btn btn-info" onclick="smoothScroll(document.getElementById('second'))">Analyse Your Own Tweet!! </button></div>
+                      
+                    </div>
+                  </form>
+                </div>
+              
+              </div>
+            </div>
+
+<!---card 1-->
+<div class="row" id="fourth">
+     <div class="col-sm-5">
+<div class="card" style="width:500px;box-shadow: 3px 3px 3px grey;">
+  <img src="data:image/png;base64,{{ Diff_emotions }}" class="card-img-top" width="500">
+  <div class="card-body">
+    <h5 class="card-title text-center">Sentiment Of Collected Tweets </h5>
+
+  </div>
+</div>
+</div>
+
+<!---card 2-->
+<div class="col-sm-5">
+<div class="card" style="width: 500px; box-shadow: 3px 3px 3px grey;">
+  <img src="data:image/png;base64,{{ Piechart }}" class="card-img-top" width="500" >
+  <div class="card-body">
+    <h5 class="card-title text-center">Percentage Of Emotions Amongst All Emotions</h5>
+
+
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row" id="third">
+<div class="col-sm-10 " style="padding-left: 260px;" id="third">
+<div class="card" style="width: 950px; " id="third">
+  <img src="data:image/png;base64,{{ Happiness_index }}" class="card-img-top" style="padding-right: -20px;" width="900px">
+  <div class="card-body" id="third">
+    <h5 class="card-title text-center">Happiness Index Of Countries</h5>
+
+  </div>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="row" style="padding-left: 200px;">
+<div class="card mb-6 col-md-8 col-md-offset-2" style="box-shadow: 3px 3px 3px grey; min-height: 200px; min-width: 350px; ">
+
+      <form class="Tweet" method="post" action="">
+    <div style="padding: 15px 15px 15px 15px;">
+        <textarea style="width: 90%; height:250px; margin:auto;" id="Input_tweet2" name="Input_tweet2">
+
+        </textarea>
+
+          <button class="btn btn-warning btn-lg align-center" style="margin-left:250px;" type="submit">Analyze Tweet</button>
+          {% csrf_token %}
+        </div>
+      </form>
+    <div class="col-md-8 second" id="second">
+<hr><hr>
+        <h5 class="card-title ">Sentiments Of Input Tweet</h5>
+    <hr><p>WRITE TWEETS OF ABOUT 100 WORDS FOR PROPER ANALYSIS!</p>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding-left: 300px">
+<div class="card mb-6 col-md-6 col-md-offset-3 " style="box-shadow: 3px 3px 3px grey;" >
+
+    <div >
+      <img src="data:image/png;base64,{{ Tweet_Sentiment }}"  class="card-img" alt="Tweet_Sentiment will be displayed here" width="85%">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Input Tweet Sentiment</h5><hr><hr>
+          <h4 class="card-text"><small class="text-muted"><b>{{ Output_Tweet }}</b></small></h4>
+      </div>
+    </div>
+</div>
+</div>
+
+<!---here goes trial and erroer-->
+
+<!---here goes trial and erroer-->
+
+
+</div>
+
+
+
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="TrialAnaly.js"></script>
+
+<script>
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+
+<script>
+window.smoothScroll = function(target) {
+    var scrollContainer = target;
+    do { //find scroll container
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+
+    var targetY = 0;
+    do { //find the top of target relatively to the container
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop;
+    } while (target = target.offsetParent);
+
+    scroll = function(c, a, b, i) {
+        i++; if (i > 30) return;
+        c.scrollTop = a + (b - a) / 30 * i;
+        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+    }
+    // start scrolling
+    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+}
+</script>
+
+
+</body>
+</html>

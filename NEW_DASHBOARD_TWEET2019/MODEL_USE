@@ -1,0 +1,42 @@
+
+#USE MAIN_TEST_AVX  AS THE CONDA ENVIRONMENT FOR EXECUTION
+
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer
+import numpy as np
+import pandas as pd
+import tensorflow.keras.utils as ku
+import pickle
+df=pd.read_csv("G:/hell.csv")#OUR DATASET
+df.drop(df.columns[0], axis=1,inplace=True)
+df=df[["text_short","text_long","chosen_emotion"]]
+
+#IMPORT THE MODEL
+from tensorflow.keras.models import load_model
+modele=load_model("G:/first_model_feeling1longonly_NEWMAIN.hdf5")
+
+
+#TOKENIZOR OBJECT IMPORTED FROM FILE TO CONVERT STRING INPUT TO INTEGER TOKENS AS USED
+#WHILE TRAINING GIVE PATH OF (token_NEWMAIN.pickle) FILE BELOW
+with open('G:/token_NEWMAIN.pickle','rb') as handle:
+    tokenizortest=pickle.load(handle)
+input=[]
+input.append(tokenizortest.texts_to_sequences(["tweet whoes emotion we have to find happy so much"])[0])
+TOKENIZED_INPUT=np.array(pad_sequences(input,maxlen=561,padding='pre'))
+#USE BELOW TO CONVERT INT TOKENS TO SENTENCE
+#THIS LINE WILL GIVE THIS OUTPUT
+# "fortunate being spending i'm positive getting sucks"
+print(tokenizortest.sequences_to_texts([[659,48,501,45,263,124,1287]])[0])
+
+
+#BELOW CODE TO MAKE DICTIONARY TO INVERSE TRANSFORM PREDICTED RESULT
+uniques,ids=np.unique(df["chosen_emotion"],return_inverse=True)
+y_code=ku.to_categorical(ids,len(uniques))
+
+#PERFORM PREDICTION AND TRANSFORM RESULT to EMOTION STRING
+PREDICT_EMOTION=modele.predict(TOKENIZED_INPUT)
+#BELOW LINE TRANSFORM INTEGER OUTPUT TO EMOTION
+OUT=uniques[PREDICT_EMOTION.argmax(1)]
+
+print("INPUT:"+str(tokenizortest.sequences_to_texts(TOKENIZED_INPUT))+" OUTPUT"+str(OUT))
+
